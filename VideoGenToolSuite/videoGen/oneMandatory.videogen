@@ -1,0 +1,4 @@
+@author "MIAGE 2 students"
+VideoGen {
+	mandatory videoseq v1 "videoGen\\videos\\flute.mp4"
+}

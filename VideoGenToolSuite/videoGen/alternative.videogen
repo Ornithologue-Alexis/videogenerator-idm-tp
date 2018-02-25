@@ -1,0 +1,12 @@
+@author "MIAGE 2 students"
+VideoGen {
+
+	alternatives v1 {
+		videoseq v11 "videoGen\\videos\\flute.mp4"
+		videoseq v12 "videoGen\\videos\\guinea_pig.mp4"
+	}	
+	alternatives v2 {
+		videoseq v21 "videoGen\\videos\\fonte.mp4"
+		videoseq v22 "videoGen\\videos\\nice_peace.mp4"
+	}
+}
