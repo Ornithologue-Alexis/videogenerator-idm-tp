@@ -1,5 +1,9 @@
 # TP IDM MIAGE MASTER 2
 
+## Le binôme
+
+Alexis RENAULT & Antoine RAVET
+
 ## Le projet
 
 Durant ce projet, nous avons eu à coder un générateur de vidéo sur le web appelé VideoGen. Pour cela nous, avons utilisé le langage Xtext et le Java. 
