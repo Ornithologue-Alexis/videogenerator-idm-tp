@@ -3,15 +3,10 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
-import org.xtext.example.mydsl.videoGen.AlternativeVideoSeq;
-import org.xtext.example.mydsl.videoGen.MandatoryVideoSeq;
-import org.xtext.example.mydsl.videoGen.OptionalVideoSeq;
-import org.xtext.example.mydsl.videoGen.VideoDescription;
 import org.xtext.example.mydsl.videoGen.VideoGeneratorModel;
-import org.xtext.example.mydsl.videoGen.VideoSeq;
+
 
 
 public class VideoGenTest {
@@ -121,7 +116,7 @@ public class VideoGenTest {
 		VideoGeneratorModel videoGen = new VideoGenHelper().loadVideoGenerator(URI.createURI("./videoGen/videogen.videogen"));
 		WriteCSV.GenerateCSV("assets\\test_csv.csv", videoGen);
 		
-		int nbLignes = Ffmpeg.getCsvLineNumber("assets\\test_csv.csv");
+		int nbLignes = Ffmpeg.lineNumberCSV("assets\\test_csv.csv");
 		List<Variant> listeVariante = VideoGenToolSuite.getListeDesVariantes(videoGen);
 		
 		assertEquals("test nombre de lignes CSV",  nbLignes, listeVariante.size() + 1);

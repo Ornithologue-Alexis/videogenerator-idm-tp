@@ -110,6 +110,7 @@ public class Ffmpeg {
 	 * Création d'un gif à partir de la vidéo (TP3 - Question 3)
 	 */
 	public static void generateGif(String pathToVideo, String gifNom) {
+		// Commande de création d'un gif
 		String command = "ffmpeg -v warning -ss 1 -t 2 -i  " + pathToVideo + " -vf scale=200:-1 -gifflags -transdiff -y assets\\gifsCreated\\" + gifNom;
 		try {
 			Runtime.getRuntime().exec(command);
@@ -124,6 +125,7 @@ public class Ffmpeg {
 	 * @param pathToVideo
 	 */
 	public static void calculateSignatureOfAnInputVideo(String pathToVideo) {
+		// Commande de création d'une signature
 		String command = "ffmpeg -i "+ pathToVideo +" -vf signature=filename=signature.bin -map 0:v -f null -";
 		try {
 			Runtime.getRuntime().exec(command);
@@ -134,6 +136,37 @@ public class Ffmpeg {
 	}
 	
 	/**
+	 * Return true s'il est contenu
+	 * @param liste
+	 * @param nom
+	 * @return
+	 */
+	public static boolean nameIsContained(final List<Video> liste, final String nom) {
+		// Sur la liste, on applique un filtre pour regarder si l'id est présent
+		return liste.stream().filter(video -> video.getId().equals(nom)).findFirst().isPresent();
+	}
+
+	
+	/**
+	 * Nombre de lignes d'un fichier CSV
+	 * @param CSVpathName
+	 * @return
+	 */
+	public static int lineNumberCSV(String pathCSV) {
+		int nbLignes = 0;
+		// On boucle grâce à un BufferedReader
+	    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathCSV))) {
+	    	while ((bufferedReader.readLine()) != null) {
+	    		// Tant que l'on atteint pas la fin, on boucle et on incrémente
+	    		nbLignes++;
+	    	}
+	     } catch (IOException e) {
+	    	 e.printStackTrace();
+	     }
+	     return nbLignes;
+	}
+	
+	/**
 	 * Créer un fichier texte à partir d'une string
 	 * 
 	 * @param texte
@@ -141,6 +174,7 @@ public class Ffmpeg {
 	 * @throws IOException
 	 */
 	public static void createTextFile(String texte, String nomDuFichier) throws IOException {
+		// On créé un fichier texte
 		File fichier = new File(nomDuFichier);
 		FileWriter fichierTexte = new FileWriter(fichier.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fichierTexte);
@@ -154,36 +188,10 @@ public class Ffmpeg {
 	 * @return
 	 */
 	public static Video creationVideo(VideoDescription description) {
+		// On créé une vidéo avec un id
 		File fichier = new File(description.getLocation());
 		String id = description.getVideoid();
 		return new Video(id, fichier);
 	}
 	
-	/**
-	 * Return if the name is contain in a List<Video> 
-	 * @param list
-	 * @param name
-	 * @return Boolean
-	 */
-	public static boolean containsName(final List<Video> list, final String name) {
-		return list.stream().filter(o -> o.getId().equals(name)).findFirst().isPresent();
-	}
-
-	
-	/**
-	 * Get the line number of csv
-	 * @param CSVpathName
-	 * @return
-	 */
-	public static int getCsvLineNumber(String CSVpathName) {
-		int lineNumber = 0;
-	    try (BufferedReader br = new BufferedReader(new FileReader(CSVpathName))) {
-	    	while ((br.readLine()) != null) {
-	    		lineNumber++;
-	    	}
-	     } catch (IOException e) {
-	    	 e.printStackTrace();
-	     }
-	     return lineNumber;
-	}
 }

@@ -28,7 +28,7 @@ public class WriteCSV {
 				fileWriter.append( ";");
 				// On regarde quelles vidéos sont contenues par la variante
 				for (String videoId : VideoGenToolSuite.getAllVideosId(videoGen)) {
-					boolean b = Ffmpeg.containsName(variant.getListeVideos(), videoId);
+					boolean b = Ffmpeg.nameIsContained(variant.getListeVideos(), videoId);
 					fileWriter.append(Boolean.toString(b));
 					fileWriter.append( ";");
 				}

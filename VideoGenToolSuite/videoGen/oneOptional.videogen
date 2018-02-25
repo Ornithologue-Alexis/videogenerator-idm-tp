@@ -1,4 +1,4 @@
-@author "MIAGE 2 students"
+@author "RAVET & RENAULT"
 VideoGen {
 	optional videoseq v1 "videoGen\\videos\\flute.mp4"
 }
