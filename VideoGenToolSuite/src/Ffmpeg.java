@@ -4,26 +4,46 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.xtext.example.mydsl.videoGen.AlternativeVideoSeq;
-import org.xtext.example.mydsl.videoGen.MandatoryVideoSeq;
-import org.xtext.example.mydsl.videoGen.OptionalVideoSeq;
-import org.xtext.example.mydsl.videoGen.Text;
 import org.xtext.example.mydsl.videoGen.VideoDescription;
-import org.xtext.example.mydsl.videoGen.VideoGeneratorModel;
-import org.xtext.example.mydsl.videoGen.VideoSeq;
+
+
+class StreamGobbler extends Thread
+{
+    InputStream is;
+    String type;
+    
+    StreamGobbler(InputStream is, String type)
+    {
+        this.is = is;
+        this.type = type;
+    }
+    
+    public void run()
+    {
+        try
+        {
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line=null;
+            while ( (line = br.readLine()) != null)
+                System.out.println(type + ">" + line);    
+            } catch (IOException ioe)
+              {
+                ioe.printStackTrace();  
+              }
+    }
+}
 
 public class Ffmpeg {
-	
-	private String pathToVlc = "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe";
 	
 	/**
 	 * Ouverture de VLC pour lire une vidéo (TP2 - Question 1)
 	 * 
 	 * @param pathToVlc
+	 * pathToVlc = "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe";
 	 * @param pathToVideo
 	 */
 	public static void startVLC(String pathToVlc, String pathToVideo) {
@@ -31,7 +51,20 @@ public class Ffmpeg {
 		try {
 			Process process = Runtime.getRuntime().exec(args);
 			try {
-				process.waitFor();
+				StreamGobbler errorGobbler = new 
+		                StreamGobbler(process.getErrorStream(), "ERROR");            
+		            
+		            // any output?
+		            StreamGobbler outputGobbler = new 
+		                StreamGobbler(process.getInputStream(), "OUTPUT");
+		                
+		            // kick them off
+		            errorGobbler.start();
+		            outputGobbler.start();
+		                                    
+		            // any error???
+		            int exitVal = process.waitFor();
+		            System.out.println("ExitValue: " + exitVal);   
 			} catch (InterruptedException e) {
 				System.out.println("Erreur du process.waitFor()");
 			}
@@ -51,7 +84,20 @@ public class Ffmpeg {
 		try {
 			Process process = Runtime.getRuntime().exec(command);
 			try {
-				process.waitFor();
+				StreamGobbler errorGobbler = new 
+		                StreamGobbler(process.getErrorStream(), "ERROR");            
+		            
+		            // any output?
+		            StreamGobbler outputGobbler = new 
+		                StreamGobbler(process.getInputStream(), "OUTPUT");
+		                
+		            // kick them off
+		            errorGobbler.start();
+		            outputGobbler.start();
+		                                    
+		            // any error???
+		            int exitVal = process.waitFor();
+		            System.out.println("ExitValue: " + exitVal);        
 			} catch (InterruptedException e) {
 				System.out.println("Erreur du process.waitFor()");
 			}
@@ -77,7 +123,21 @@ public class Ffmpeg {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			duree = Double.parseDouble(bufferedReader.readLine());
 			try {
-				process.waitFor();
+				StreamGobbler errorGobbler = new 
+		                StreamGobbler(process.getErrorStream(), "ERROR");            
+		            
+		            // any output?
+		            StreamGobbler outputGobbler = new 
+		                StreamGobbler(process.getInputStream(), "OUTPUT");
+		                
+		            // kick them off
+		            errorGobbler.start();
+		            outputGobbler.start();
+		                                    
+		            // any error???
+		            int exitVal = process.waitFor();
+		            System.out.println("ExitValue: " + exitVal);   
+					
 			} catch (InterruptedException e) {
 				System.out.println("Erreur du process.waitFor()");
 			}

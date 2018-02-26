@@ -1,0 +1,2 @@
+file 'C:\Users\Alexis\eclipse-workspace\videogenerator-idm\VideoGenToolSuite\videoGen\videos\flute.mp4' 
+file 'C:\Users\Alexis\eclipse-workspace\videogenerator-idm\VideoGenToolSuite\videoGen\videos\guinea_pig.mp4' 

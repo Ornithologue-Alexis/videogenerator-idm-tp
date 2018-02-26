@@ -20,6 +20,7 @@ public class VideoGenToolSuite {
 	 */
 	public static String getFileForFfmpeg(VideoGeneratorModel videoGen, String nomfichier) throws IOException {
 		String playlist = "";
+		// On récupère l'ensemble des vidéos
 		List<VideoSeq> videos = videoGen.getVideoseqs();
 		for(VideoSeq video : videos) {
 			// Video mandatory
@@ -51,11 +52,12 @@ public class VideoGenToolSuite {
 	
 	/**
 	 * Calcul de la durée maximale d’une variante de vidéo (TP2 - Question 3)
-	 * 
+	 * @param videoGen
 	 * @return durée
 	 */
 	public static Double getMaxDuration(VideoGeneratorModel videoGen) {
 		Double dureeVariante = 0.0;
+		// On récupère l'ensemble des vidéos
 		List<VideoSeq> videos = videoGen.getVideoseqs();
 		for(VideoSeq video : videos) {
 			// Video mandatory
@@ -88,7 +90,7 @@ public class VideoGenToolSuite {
 	
 	/**
 	 * Transformation qui prend en entrée une spécification VideoGen et qui génère en sortie un ensemble de vignettes (TP2 - Question 4)
-	 * 
+	 * @param videoGen
 	 * @return
 	 */
 	public static void thumbnailsFromAModel(VideoGeneratorModel videoGen) {
@@ -127,6 +129,7 @@ public class VideoGenToolSuite {
 	
 	/**
 	 * Fournis l'ensemble des variantes pour un modèle donné (TP3 - Question 1)
+	 * @param videoGen
 	 * Utilisé dans WriteCSV
 	 */
 	public static List<Variant> getListeDesVariantes(VideoGeneratorModel videoGen) {
@@ -230,7 +233,7 @@ public class VideoGenToolSuite {
 	
 	/**
 	 * Transformation d'une variante de vidéos en GIF (TP3 - Question 3)
-	 * 
+	 * @param videoGen
 	 * @return
 	 */
 	public static void gifFromAModel(VideoGeneratorModel videoGen) {
@@ -293,7 +296,7 @@ public class VideoGenToolSuite {
 	
 	/**
 	 * Fonction qui compte le nombre de variantes possibles sans énumérer les solutions (TP4 - Question 1)
-	 * 
+	 * @param videoGen
 	 * @return nbVariantes
 	 */
 	public static int nbVariantes(VideoGeneratorModel videoGen) {
@@ -325,6 +328,7 @@ public class VideoGenToolSuite {
 	
 	/**
 	 * T4 - Q6 Transformation qui prend en entrée une spécification VideoGen et qui vérifie que les identifieurs doivent être uniques
+	 * @param videoGen
 	 * @return boolean
 	 */
 	public static boolean verifyUniqueIds(VideoGeneratorModel videoGen) {

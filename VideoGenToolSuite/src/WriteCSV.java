@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.xtext.example.mydsl.videoGen.VideoGeneratorModel;
 
@@ -38,14 +36,15 @@ public class WriteCSV {
 					listeVideosVariante = listeVideosVariante + "file '" + v.getFile().getCanonicalPath() +"' \n";
 				}
 
+				System.out.println("CA PASSE");
 				// On créé une playlist qui permet d'aller chercher les vidéos de la variante
 				String playlistPath = "assets\\playlists\\list-csv-variant" + variant.getId() + ".txt";
 				Ffmpeg.createTextFile(listeVideosVariante, playlistPath);
-		
+				System.out.println("CA PASSE");
 				// On créé la variante en concatenant les vidéos
 				String outputffmpeg = "output-csv-variant" + variant.getId() + ".mp4";
 				Ffmpeg.startFfmpeg(playlistPath, outputffmpeg);
-			
+				System.out.println("CA PASSE");
 				// On récupère la taille de la variante créé
 				File realFile = new File("medias\\outputs\\" + outputffmpeg);
 				fileWriter.append(Long.toString(realFile.length()));
@@ -53,6 +52,7 @@ public class WriteCSV {
 	        }
 			
 			try {
+				System.out.println("CA PASSE");
 	        	fileWriter.flush();
 	            fileWriter.close();
 			} catch (Exception e) {

@@ -114,12 +114,36 @@ public class VideoGenTest {
 	@Test
 	public void testNbLignesCSV() throws InterruptedException {
 		VideoGeneratorModel videoGen = new VideoGenHelper().loadVideoGenerator(URI.createURI("./videoGen/videogen.videogen"));
+		// On génère le CSV de test
 		WriteCSV.GenerateCSV("assets\\test_csv.csv", videoGen);
 		
+		// On récupère le nombre de lignes de notre CSV
 		int nbLignes = Ffmpeg.lineNumberCSV("assets\\test_csv.csv");
 		List<Variant> listeVariante = VideoGenToolSuite.getListeDesVariantes(videoGen);
 		
+		// +1 car la fonction size commence à 0
 		assertEquals("test nombre de lignes CSV",  nbLignes, listeVariante.size() + 1);
+	}
+	
+	/**
+	 * test pour vérifier que le nombre de vignettes produites (fin du TP2) (TP4 - Question )
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void testThumbnails() throws InterruptedException {
+		
+		// Même principe que le test des gifs. On génère les thumbnails à partir de la même grammaire, on check la taille
+		// du folder, et on compare avec les id
+		VideoGeneratorModel videoGen = new VideoGenHelper().loadVideoGenerator(URI.createURI("./videoGen/videogen.videogen"));
+		VideoGenToolSuite.thumbnailsFromAModel(videoGen);
+		
+		// On récupère les ids des vidéos
+		List<String> ids =  VideoGenToolSuite.getAllVideosId(videoGen);
+		
+		// On compte les nombre de miniatures créés
+		int countThumbnails = new File ("assets/thumbnails/").list().length;
+		
+		assertEquals("Test nombre de thumbnails créés", countThumbnails, ids.size());
 	}
 	
 }

@@ -11,7 +11,7 @@ class VideoGenTest1 {
 	@Test
 	def void testLoadModel() {
 		
-		val videoGen = new VideoGenHelper().loadVideoGenerator(URI.createURI("example1.videogen"))
+		val videoGen = new VideoGenHelper().loadVideoGenerator(URI.createURI("videogen.videogen"))
 		assertNotNull(videoGen)
 		println(videoGen.information.authorName)		
 		// and then visit the model
