@@ -1,3 +1,4 @@
+package miage.fr.binome;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -80,7 +81,7 @@ public class Ffmpeg {
 	 * @param fichierDeSortie
 	 */
 	public static void startFfmpeg(String ffmpegPlaylist, String fichierDeSortie) {
-		String command = "ffmpeg -y -f concat -safe 0 -i " + ffmpegPlaylist + " -c copy src\\assets\\video\\" + fichierDeSortie;
+		String command = "ffmpeg -y -f concat -safe 0 -i " + ffmpegPlaylist + " -c copy assets\\videosCreated\\" + fichierDeSortie;
 		try {
 			Process process = Runtime.getRuntime().exec(command);
 			try {
@@ -158,9 +159,8 @@ public class Ffmpeg {
 	 * @return
 	 */
 	public static void creerMiniature(String pathToVideo, String miniatureNom) {
-		String commande = "ffmpeg -i " + pathToVideo + " -ss 00:00:02 -vframes 1  src\\assets\\thumbnails\\" + miniatureNom;
+		String commande = "ffmpeg -i " + pathToVideo + " -ss 00:00:05 -vframes 1  assets\\thumbnails\\" + miniatureNom;
 		try {
-			System.out.println(pathToVideo);
 			Runtime.getRuntime().exec(commande);
 		} catch (IOException e) {
 			System.out.println("Erreur lors de la génération de la miniature");

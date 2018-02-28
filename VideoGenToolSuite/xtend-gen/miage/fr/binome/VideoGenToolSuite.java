@@ -1,3 +1,4 @@
+package miage.fr.binome;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,20 +43,6 @@ public class VideoGenToolSuite {
 				int alternative =  (int)(Math.random() * listeDescription.size());
 				playlist = playlist + "file '" + listeDescription.get(alternative).getLocation() +"' \n";				
 			}			
-		}
-		
-		// On écrit la playlist obtenue dans un fichier
-		String playlistFichier = "assets\\playlists\\" + nomfichier + ".txt";
-		Ffmpeg.createTextFile(playlist, playlistFichier);
-		return playlistFichier;
-	}
-	
-	
-	public static String getFileForFfmpegVariante(List<Video> videoListe, String nomfichier) throws IOException {
-		String playlist = "";
-		// On récupère l'ensemble des vidéos
-		for(Video video : videoListe) {
-			playlist = playlist + "file '" + video.getFile().getAbsolutePath() +"' \n";	
 		}
 		
 		// On écrit la playlist obtenue dans un fichier
