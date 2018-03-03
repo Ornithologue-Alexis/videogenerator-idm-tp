@@ -45,7 +45,7 @@ public class VideoGenToolSuite {
 		}
 		
 		// On écrit la playlist obtenue dans un fichier
-		String playlistFichier = "assets\\playlists\\" + nomfichier + ".txt";
+		String playlistFichier = "server\\ressources\\playlists\\" + nomfichier + ".txt";
 		Ffmpeg.createTextFile(playlist, playlistFichier);
 		return playlistFichier;
 	}
@@ -59,7 +59,7 @@ public class VideoGenToolSuite {
 		}
 		
 		// On écrit la playlist obtenue dans un fichier
-		String playlistFichier = "assets\\playlists\\" + nomfichier + ".txt";
+		String playlistFichier = "server\\ressources\\playlists\\" + nomfichier + ".txt";
 		Ffmpeg.createTextFile(playlist, playlistFichier);
 		return playlistFichier;
 	}
@@ -275,9 +275,9 @@ public class VideoGenToolSuite {
 		
 
 	/**
-	 * Get all videos IDs 
+	 * Récupérer les IDs des vidéos
 	 * @param videoGen
-	 * @return List of Strings
+	 * @return idVideo
 	 */
 	public static List<String> getAllVideosId(VideoGeneratorModel videoGen) {
 		List<VideoSeq> videos = videoGen.getVideoseqs();

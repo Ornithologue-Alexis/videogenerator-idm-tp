@@ -80,7 +80,7 @@ public class Ffmpeg {
 	 * @param fichierDeSortie
 	 */
 	public static void startFfmpeg(String ffmpegPlaylist, String fichierDeSortie) {
-		String command = "ffmpeg -y -f concat -safe 0 -i " + ffmpegPlaylist + " -c copy src\\assets\\video\\" + fichierDeSortie;
+		String command = "ffmpeg -y -f concat -safe 0 -i " + ffmpegPlaylist + " -c copy server\\ressources\\videosCreated\\" + fichierDeSortie;
 		try {
 			Process process = Runtime.getRuntime().exec(command);
 			try {
@@ -158,7 +158,7 @@ public class Ffmpeg {
 	 * @return
 	 */
 	public static void creerMiniature(String pathToVideo, String miniatureNom) {
-		String commande = "ffmpeg -i " + pathToVideo + " -ss 00:00:02 -vframes 1  src\\assets\\thumbnails\\" + miniatureNom;
+		String commande = "ffmpeg -i " + pathToVideo + " -ss 00:00:02 -vframes 1  server\\ressources\\thumbnails\\" + miniatureNom;
 		try {
 			System.out.println(pathToVideo);
 			Runtime.getRuntime().exec(commande);
